@@ -1,69 +1,5 @@
 import java.util.Scanner;
-
-import javax.tools.Diagnostic;
-
-class Customer {
-	String name;
-	int accNo;
-	int balance;
-
-	public Customer(String name, int accNo) {
-		this.name = name;
-		this.accNo = accNo;
-		this.balance = 0;
-	}
-
-	public void creditTransaction(int amount) {
-		Scanner input = new Scanner(System.in);
-		try {
-			if (amount < 0)
-				throw new InvalidCredit();
-
-			else
-				balance = balance + amount;
-		} catch (InvalidCredit e) {
-			amount = input.nextInt();
-			creditTransaction(amount);
-		}
-	
-	}
-	
-	public void debitTransaction(int amount) {
-		Scanner input = new Scanner(System.in);
-		try {
-			if (amount > balance)
-				throw new InvalidDebit();
-
-			else
-				balance = balance - amount;
-		} catch (InvalidDebit e) {
-			amount = input.nextInt();
-			debitTransaction(amount);
-		}
-	
-	}
-	
-	public void displayDetails(){
-		System.out.println("Customer Details");
-		System.out.println("****************");
-		System.out.println("Customer Name : "+this.name);
-		System.out.println("Customer AccNo : "+this.accNo);
-		System.out.println("Customer Current Balance : "+this.balance);
-	}
-	
-}
-
-class InvalidCredit extends Exception {
-	public InvalidCredit() {
-		System.out.print("Please enter valid credit amount");
-	}
-}
-
-class InvalidDebit extends Exception {
-	public InvalidDebit() {
-		System.out.print("Please enter valid debit amount");
-	}
-}
+import com.raja.oopslab.exception.bank.*;
 public class Main {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
@@ -76,7 +12,7 @@ public class Main {
 		Customer aCustomer = new Customer(name, acc_no);
 		int choice = 0;
 		while(choice != 4){
-			System.out.println("\n1. Add Money\n2. Get Money\n3. Details\n4. Exit");
+			System.out.println("\n1. Add Money\n2. Get Money\n3. Details\n4. Exit\n\nEnter Your Choice");
 			choice = input.nextInt();
 			switch(choice){
 			case 1:
